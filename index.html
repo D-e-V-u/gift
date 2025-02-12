@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #ff00ff, #ff6600, #ff0000);
+            color: white;
+            transition: background 0.5s ease-in-out;
+        }
+        .container {
+            margin-top: 20vh;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .yes-btn { background: limegreen; color: white; }
+        .no-btn { background: red; color: white; }
+        .btn:hover { transform: scale(1.1); }
+        .hidden { display: none; }
+        #sadMessage { font-size: 22px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="startScreen">
+        <h1>DO YOU WANT TO PLAY A GAME?</h1>
+        <button class="btn yes-btn" onclick="startGame()">YES</button>
+        <button class="btn no-btn" onclick="showSadMessage()">NO</button>
+        <p id="sadMessage" class="hidden">😢😢 Plz let's play... 🥺🥺</p>
+    </div>
+
+    <div class="container hidden" id="questionScreen">
+        <h2 id="questionText"></h2>
+        <button class="btn yes-btn" onclick="nextQuestion(true)">YES</button>
+        <button class="btn no-btn" onclick="nextQuestion(false)">NO</button>
+    </div>
+
+    <script>
+        let questionIndex = 0;
+        const questions = [
+            "Do you like talking to me...?",
+            "Do you like being with me...?",
+            "Do you love me....?"
+        ];
+
+        function startGame() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            document.getElementById('questionText').innerText = questions[questionIndex];
+        }
+
+        function showSadMessage() {
+            document.getElementById('sadMessage').classList.remove('hidden');
+        }
+
+        function nextQuestion(answer) {
+            if (!answer) return alert("😢 Oh no! That makes me sad...");
+
+            questionIndex++;
+            if (questionIndex < questions.length) {
+                document.getElementById('questionText').innerText = questions[questionIndex];
+            } else {
+                window.location.href = "valentine.html";  
+            }
+        }
+    </script>
+
+</body>
+</html>
